@@ -1,5 +1,8 @@
 """ Utility functions for processing point clouds.
 
+@Author: Mehak Sheikh
+@Contact: msheikh.mscs16seecs@seecs.edu.pk
+
 """
 
 import os
