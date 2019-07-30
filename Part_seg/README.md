@@ -1,4 +1,4 @@
-# Object Recognition and Segmentation Using Unstructured 3D Point Clouds Via Deep Convolution Neural Networks
+# DFTNet: Deep Feature Transformation Based Network for Object Categorization and Part Segmentation in 3D Point Clouds
 
 ## Part segmentation
 
