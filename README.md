@@ -1,5 +1,4 @@
-# Object Recognition and Segmentation Using Unstructured 3D Point Clouds Via Deep Convolution Neural Networks
-
+# DFTNet: Deep Feature Transformation Based Network for Object Categorization and Part Segmentation in 3D Point Clouds
 ## Usage
 
 * This code is tested in Ubuntu 16.04 LTS with CUDA 8.0 and Tensorflow-gpu==1.4
