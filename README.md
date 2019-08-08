@@ -5,13 +5,12 @@ Point Clouds are imminent source of scalable geometric data structure. Point clo
 
 * This code is tested in Ubuntu 16.04 LTS with CUDA 8.0, Tensorflow-gpu==1.4, and Python 3.6
 
-## Requirements
-* [TensorFlow](https://www.tensorflow.org/)
 
 ## Installation
 Install TensorFlow. You may also need to install h5py.
 
-To install Tensor flow use (https://www.tensorflow.org/)
+To install TensorFlow use 
+* [TensorFlow](https://www.tensorflow.org/)
 
 To install h5py for Python:
 
@@ -46,7 +45,7 @@ This code includes the following third party libraries and data:
 * h5py
 
 ## Acknowledgemets
-* The code for Training and Testing is borrowed from [https://github.com/WangYueFt/dgcnn]
+* The code for Training and Testing is borrowed from [WangYueFt/dgcnn]
 
 ## License
 NUST
