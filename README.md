@@ -15,7 +15,7 @@ To install TensorFlow use
 * [TensorFlow](https://www.tensorflow.org/)
 
 If you are using PyTorch, you can find a third-party pytorch implementation 
-* [pytorch-DFTNet](./pytorch)
+* [pytorch-DFTNet]<a href="https://github.com/fxia22/pointnet.pytorch" target="_blank">here</a>. 
 
 To install h5py for Python:
 
