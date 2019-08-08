@@ -3,11 +3,22 @@
 Point Clouds are imminent source of scalable geometric data structure. Point clouds are in unstructured form, due to irregularities in structure the shapes are not organized in a pre-defined manner. The deep learning methods, voxelization is computationally expensive due to unnecessary data spasity. It is an extremely challenging task to deal with unstructured 3D point clouds using a deep neural network. To overcome this issue, we designed a new deep net architecture that directly takes raw input point clouds. This paper proposed a novel deep architecture dubbed with edge convolution and feature transformation layers suitable for performing high-level point cloud processing tasks, including 3D object recognition and part segmentation. The model works recursively where each point of the point cloud is used as an input to learn more fine-grained geometric features.
 ## Usage
 
-* This code is tested in Ubuntu 16.04 LTS with CUDA 8.0 and Tensorflow-gpu==1.4
+* This code is tested in Ubuntu 16.04 LTS with CUDA 8.0, Tensorflow-gpu==1.4, and Python 3.6
 
 ## Requirements
 * [TensorFlow](https://www.tensorflow.org/)
-* NVIDIA Tesla K80 GPUs
+
+## Installation
+Install TensorFlow. You may also need to install h5py.
+
+To install Tensor flow use (https://www.tensorflow.org/)
+
+To install h5py for Python:
+
+``` bash
+sudo apt-get install libhdf5-dev
+sudo pip install h5py
+```
 
 ## Point Cloud Classification
 * Run the training script:
@@ -35,7 +46,7 @@ This code includes the following third party libraries and data:
 * h5py
 
 ## Acknowledgemets
-* The code forTraining and Testing is borrowed from [DGCNN]
+* The code for Training and Testing is borrowed from [https://github.com/WangYueFt/dgcnn]
 
 ## License
 NUST
