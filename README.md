@@ -9,8 +9,13 @@ Point Clouds are imminent source of scalable geometric data structure. Point clo
 ## Installation
 Install TensorFlow. You may also need to install h5py.
 
+
+
 To install TensorFlow use 
 * [TensorFlow](https://www.tensorflow.org/)
+
+If you are using PyTorch, you can find a third-party pytorch implementation 
+* [pytorch-DFTNet](./pytorch)
 
 To install h5py for Python:
 
@@ -45,7 +50,7 @@ This code includes the following third party libraries and data:
 * h5py
 
 ## Acknowledgemets
-* The code for Training and Testing is borrowed from *[DGCNN] (https://github.com/WangYueFt/dgcnn)
+* The code for Training and Testing is borrowed from [DGCNN](https://github.com/WangYueFt/dgcnn).
 
 ## License
 NUST
