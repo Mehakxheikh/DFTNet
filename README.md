@@ -7,6 +7,7 @@ Point Clouds are imminent source of scalable geometric data structure. Point clo
 
 ## Requirements
 * [TensorFlow](https://www.tensorflow.org/)
+* NVIDIA Tesla K80 GPUs
 
 ## Point Cloud Classification
 * Run the training script:
