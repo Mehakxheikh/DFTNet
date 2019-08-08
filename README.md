@@ -45,7 +45,7 @@ This code includes the following third party libraries and data:
 * h5py
 
 ## Acknowledgemets
-* The code for Training and Testing is borrowed from [WangYueFt/dgcnn]
+* The code for Training and Testing is borrowed from *[DGCNN] (https://github.com/WangYueFt/dgcnn)
 
 ## License
 NUST
