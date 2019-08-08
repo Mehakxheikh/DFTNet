@@ -18,23 +18,23 @@ python train.py
 python evalutate.py
 
 ```
-#Training Data
+## Training Data
 
 * Data folder contains links of the datasets for both classification and part segmentation.
 
-# Dependencies
-* This code includes the following third party libraries and data:
+## Dependencies
+This code includes the following third party libraries and data:
 
-ModelNet40 data from PointNet++
+* ModelNet40 data from PointNet++
 
-ShapeNet Part data from 3D ShapeNets
+* ShapeNet Part data from 3D ShapeNets
 
-Some other utility code from DGCNN
+* Some other utility code from DGCNN
 
-h5py
+* h5py
 
-#Acknowledgemets
-The code forTraining and Testing is borrowed from [DGCNN]
+## Acknowledgemets
+* The code forTraining and Testing is borrowed from [DGCNN]
 
 ## License
 NUST
