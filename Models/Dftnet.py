@@ -55,7 +55,7 @@ def get_model(point_cloud, is_training, bn_decay=None):
     net_transformed = tf.matmul(tf.squeeze(net, axis=[2]), transform)
     net_transformed = tf.expand_dims(net_transformed, [2])
 
-# Actual mlp network arcitecture of our model
+
   net = tf_util.conv2d(edge_feature, 64, [1,1],
                        padding='VALID', stride=[1,1],
                        bn=True, is_training=is_training,
@@ -121,25 +121,34 @@ def get_model(point_cloud, is_training, bn_decay=None):
   adj_matrix = tf_util.pairwise_distance(net)
   nn_idx = tf_util.knn(adj_matrix, k=k)
   edge_feature = tf_util.get_edge_feature(net, nn_idx=nn_idx, k=k)
+  
+  
+  net = tf_util.conv2d(edge_feature, 64, [1,1],
+                       padding='VALID', stride=[1,1],
+                       bn=True, is_training=is_training,
+                       scope='dftnet6', bn_decay=bn_decay)
+  net = tf.reduce_max(net, axis=-2, keep_dims=True)
+  net7 = net
 
-#Two fully connected shared Convoution layer with 128 neurons
+  adj_matrix = tf_util.pairwise_distance(net)
+  nn_idx = tf_util.knn(adj_matrix, k=k)
+  edge_feature = tf_util.get_edge_feature(net, nn_idx=nn_idx, k=k)
 
   net = tf_util.conv2d(edge_feature, 128, [1,1],
                        padding='VALID', stride=[1,1],
                        bn=True, is_training=is_training,
                        scope='dftnet7', bn_decay=bn_decay)
   net = tf.reduce_max(net, axis=-2, keep_dims=True)
-  net7 = net
+  net8 = net
   
-#Max-pooling layer
-  net = tf_util.conv2d(tf.concat([net1, net2, net3, net4, net5, net6, net7], axis=-1), 1024, [1, 1], 
+  net = tf_util.conv2d(tf.concat([net1, net2, net3, net4, net5, net6, net7, net8], axis=-1), 1024, [1, 1], 
                        padding='VALID', stride=[1,1],
                        bn=True, is_training=is_training,
                        scope='agg', bn_decay=bn_decay)
  
   net = tf.reduce_max(net, axis=1, keep_dims=True) 
 
-  # MLP on global point cloud vector
+ 
   net = tf.reshape(net, [batch_size, -1]) 
   net = tf_util.fully_connected(net, 512, bn=True, is_training=is_training,
                                 scope='fc1', bn_decay=bn_decay)
