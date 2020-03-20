@@ -25,32 +25,14 @@ def get_model(point_cloud, input_label, is_training, cat_num, part_num, \
   nn_idx = tf_util.knn(adj, k=k)
   edge_feature = tf_util.get_edge_feature(input_image, nn_idx=nn_idx, k=k)
 
-# spatial transformation layer
   with tf.variable_scope('transform_net1') as sc:
-    transform = input_transform_net(edge_feature, is_training, bn_decay, K=3, is_dist=True)
+  transform = input_transform_net(edge_feature, is_training, bn_decay, K=3, is_dist=True)
   point_cloud_transformed = tf.matmul(point_cloud, transform)
   input_image = tf.expand_dims(point_cloud_transformed, -1)
   adj = tf_util.pairwise_distance(point_cloud_transformed)
   nn_idx = tf_util.knn(adj, k=k)
   edge_feature = tf_util.get_edge_feature(input_image, nn_idx=nn_idx, k=k)
 
-# Feature transfromation layers
-
-  net = tf_util.conv2d(input_image, 64, [1,3],
-                       padding='VALID', stride=[1,1],
-                       bn=True, is_training=is_training, weight_decay=weight_decay,
-                       scope='conv1', bn_decay=bn_decay, is_dist=True)
-  
-  net = tf_util.conv2d(net, 64, [1,1],
-                       padding='VALID', stride=[1,1],
-                       bn=True, is_training=is_training, weight_decay=weight_decay,
-                       scope='conv2', bn_decay=bn_decay, is_dist=True)
-
-  adj_matrix = tf_util.pairwise_distance(net)
-  nn_idx = tf_util.knn(adj_matrix, k=k)
-  edge_feature = tf_util.get_edge_feature(net, nn_idx=nn_idx, k=k)
-
-# EdgeConv with feature transformation layers
 
   out1 = tf_util.conv2d(edge_feature, 64, [1,1],
                        padding='VALID', stride=[1,1],
@@ -98,21 +80,17 @@ def get_model(point_cloud, input_label, is_training, cat_num, part_num, \
 
   net_max_3 = tf.reduce_max(out6, axis=-2, keep_dims=True)
   net_mean_3 = tf.reduce_mean(out6, axis=-2, keep_dims=True)
+    
 
-  out7 = tf_util.conv2d(tf.concat([net_max_3, net_mean_3], axis=-1), 64, [1,1],
-                       padding='VALID', stride=[1,1],
-                       bn=True, is_training=is_training, weight_decay=weight_decay,
-                       scope='adj_conv7', bn_decay=bn_decay, is_dist=True)
-
-  out8 = tf_util.conv2d(tf.concat([out3, out5, out7], axis=-1), 1024, [1, 1], 
+  out7 = tf_util.conv2d(tf.concat([out3, out5, out6], axis=-1), 1024, [1, 1], 
                        padding='VALID', stride=[1,1],
                        bn=True, is_training=is_training,
                        scope='adj_conv13', bn_decay=bn_decay, is_dist=True)
 
-  out_max = tf_util.max_pool2d(out8, [num_point, 1], padding='VALID', scope='maxpool')
+  out_max = tf_util.max_pool2d(out7, [num_point, 1], padding='VALID', scope='maxpool')
 
   one_hot_label_expand = tf.reshape(input_label, [batch_size, 1, 1, cat_num])
-  one_hot_label_expand = tf_util.conv2d(one_hot_label_expand, 128, [1, 1], 
+  one_hot_label_expand = tf_util.conv2d(one_hot_label_expand, 64, [1, 1], 
                        padding='VALID', stride=[1,1],
                        bn=True, is_training=is_training,
                        scope='one_hot_label_expand', bn_decay=bn_decay, is_dist=True)
@@ -128,8 +106,8 @@ def get_model(point_cloud, input_label, is_training, cat_num, part_num, \
                                      out5,
                                      net_max_3,
                                      net_mean_3,
-                                     out7,
-                                     out8])
+                                     out6,
+                                     out7])
 
   net2 = tf_util.conv2d(concat, 256, [1,1], padding='VALID', stride=[1,1], bn_decay=bn_decay,
             bn=True, is_training=is_training, scope='seg/conv1', weight_decay=weight_decay, is_dist=True)
